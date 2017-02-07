@@ -1,30 +1,24 @@
 package com.application.rachelbagwell.myapplication;
 
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.*;
 import android.widget.*;
-import android.view.*;
-import android.view.View.OnClickListener;
-import android.view.Menu;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.media.MediaPlayer;
 
 
 
-
 public class MainActivity extends AppCompatActivity {
     private Button Random;
-    private Button Button5;
+    private Button Button4;
     private Button Go;
     private MediaPlayer mpE;
     private MediaPlayer mpF;
@@ -45,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mpE = MediaPlayer.create(this, R.raw.scalee);
         mpF = MediaPlayer.create(this, R.raw.scalef);
         mpFSharp = MediaPlayer.create(this, R.raw.scalefs);
@@ -63,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
         Go = (Button) findViewById(R.id.Go);
         Random = (Button) findViewById(R.id.Random);
 
-//RANDOM GENERATOR
 
     }
+
+
+    //RANDOM CIRCLE GENERATOR
 
     public void Random(View v) {
 
@@ -78,10 +75,8 @@ public class MainActivity extends AppCompatActivity {
         final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
-
         Bitmap bmp = Bitmap.createBitmap(2000, 2000, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmp);
-
         Paint paintRandom = new Paint();
 
 
@@ -99,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         int blue = (int) (max * Math.random());
 
 
-        //OUTER CIRCLE
+        //OUTER LAYER CIRCLE
 
         paintRandom.setColor(Color.argb(255, red, green, blue));
         paintRandom.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -115,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         imgCircle1.setVisibility(View.INVISIBLE);
 
 
-        //SECOND OUTERMOST CIRCLE
+        //SECOND LAYER OF CIRCLE
 
 
         int r = (int) (max * Math.random());
@@ -136,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         imgCircle2.setVisibility(View.INVISIBLE);
 
 
-        //INNERMOST CIRCLE
+        //INNERMOST LAYER OF CIRCLE
 
         int R = (int) (max * Math.random());
         int G = (int) (max * Math.random());
@@ -157,8 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-// AMOUNT OF CIRCLES AS PER REQUEST
-
+    // AMOUNT OF CIRCLES AS PER REQUEST
 
     public void Go(View v) {
 
@@ -173,15 +167,13 @@ public class MainActivity extends AppCompatActivity {
         final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
-        int amount = Math.round(Float.valueOf(editText.getText().toString()));
-
         Bitmap bmp = Bitmap.createBitmap(2000, 2000, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmp);
-
         Paint paintRandom = new Paint();
 
         int i;
         int max = 255;
+        int amount = Math.round(Float.valueOf(editText.getText().toString()));
 
 
         for (i = 0; i < amount; i++) {
@@ -191,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             float randomY = (float) (Math.random() * 2000);
 
 
-            //OUTER CIRCLE
+            //OUTER LAYER OF CIRCLE
 
 
             int red = (int) (max * Math.random());
@@ -213,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             imgCircle1.setVisibility(View.INVISIBLE);
 
 
-            //SECOND OUTERMOST CIRCLE
+            //SECOND LAYER OF CIRCLE
 
 
             int r = (int) (max * Math.random());
@@ -234,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
             imgCircle2.setVisibility(View.INVISIBLE);
 
 
-            //INNERMOST CIRCLE
+            //INNERMOST LAYER OF CIRCLE
 
             int R = (int) (max * Math.random());
             int G = (int) (max * Math.random());
@@ -270,21 +262,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onChallenge5ButtonClick(View v) {
+    //     PLAYS NOTE AND CREATES CIRCLE AFTER EACH NOTE
 
-        Log.e("My Activity", "Challenge 5 Button clicked");
+    public void onChallenge4ButtonClick(View v) {
+
+        Log.e("My Activity", "Challenge 4 Button clicked");
         MediaPlayer[] notes = {mpE, mpFSharp, mpG, mpA, mpB, mpCSharp, mpD, mpE};
         int i;
 
-        for (i = 0; i < notes.length; i++) {
-
-            notes[i].seekTo(0);
-            notes[i].start();
-            Random(v);
-        }
-
         try {
-            delayPlaying(WHOLE_NOTE / 2);
+
+
+            for (i = 0; i < notes.length; i++) {
+
+                notes[i].seekTo(0);
+                notes[i].start();
+                Random(v);
+                delayPlaying(WHOLE_NOTE / 2);
+            }
 
 
         } catch (InterruptedException e) {
@@ -299,89 +294,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-////final ImageView imgCircle2 = (ImageView) findViewById(R.id.imgCircle2);
-//final ImageView imgCircle3 = (ImageView) findViewById(R.id.imgCircle3);
-//
-//    final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-//    final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-//
-//
-//    int amount = Math.round(Float.valueOf(editText.getText().toString()));
-//
-//
-//
-//    int i;
-//
-//    Bitmap bmp = Bitmap.createBitmap(2000, 2000, Bitmap.Config.ARGB_8888);
-//    Canvas canvas = new Canvas(bmp);
-//
-//    Paint paintRandom = new Paint();
-//
-//
-//for (i = 0; i < amount; i++ ) {
-//
-//        Log.e("My Activity", "Go " + amount );
-//
-//        float randomRadius = (float) (Math.random() * 400);
-//        float randomX = (float) (Math.random() * 2000);
-//        float randomY = (float) (Math.random() * 2000);
-//
-//
-//
-//        int max = 255;
-//
-//        int red = (int)(max  * Math.random());
-//        int green= (int)(max  * Math.random());
-//        int blue=  (int)(max  * Math.random());
-//
-//
-//        //OUTER CIRCLE
-//
-//        paintRandom.setColor(Color.argb(255, red, green, blue));
-//        paintRandom.setStyle(Paint.Style.FILL_AND_STROKE);
-//
-//        canvas.drawCircle(randomX, randomY, randomRadius, paintRandom);
-//        imgCircle1.setImageBitmap(bmp);
-//
-//        imgCircle1.startAnimation(animationFadeIn);
-//        animationFadeIn.setDuration(5000);
-//
-//        imgCircle1.startAnimation(animationFadeOut);
-//        animationFadeOut.setDuration(3000);
-//        imgCircle1.setVisibility(View.INVISIBLE);
-//
-//
-//        //SECOND OUTERMOST CIRCLE
-//
-//        paintRandom.setColor(Color.argb(255, red, green, blue));
-//        paintRandom.setStyle(Paint.Style.FILL_AND_STROKE);
-//
-//        canvas.drawCircle(randomX, randomY, randomRadius / 2, paintRandom);
-//        imgCircle2.setImageBitmap(bmp);
-//
-//        animationFadeIn.setDuration(5000);
-//        imgCircle2.startAnimation(animationFadeIn);
-//
-//        animationFadeIn.setDuration(3000);
-//        imgCircle2.startAnimation(animationFadeOut);
-//        imgCircle2.setVisibility(View.INVISIBLE);
-//
-//
-//        //INNERMOST CIRCLE
-//
-//        paintRandom.setColor(Color.argb(255, red, green, blue));
-//        paintRandom.setStyle(Paint.Style.FILL_AND_STROKE);
-//        canvas.drawCircle(randomX, randomY, randomRadius / 6, paintRandom);
-//        imgCircle3.setImageBitmap(bmp);
-//
-//        imgCircle3.startAnimation(animationFadeIn);
-//        animationFadeIn.setDuration(5000);
-//        imgCircle3.startAnimation(animationFadeOut);
-//        animationFadeOut.setDuration(3000);
-//        imgCircle3.setVisibility(View.INVISIBLE);
-//
-//
-//
-//        }
-//        }
